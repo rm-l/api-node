@@ -1,3 +1,5 @@
-import { server } from "./server/server";
+import { app } from './server/server';
 
-server.listen(3333, () => console.log("listening on port 3333"));
+const port = 3333;
+
+app.listen(port, () => console.log(`Listening on port ${port}`));
