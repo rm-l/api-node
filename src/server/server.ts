@@ -1,10 +1,10 @@
 import express from 'express';
 
-const app = express();
+const server = express();
 
-app.get('/', (req, res) => {
-    return res.send('teste numero2!');
+server.get('/', (req, res) => {
+    return res.send('Hi!');
 });
 
-export { app };
+export { server };
 
