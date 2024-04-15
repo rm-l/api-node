@@ -43,6 +43,8 @@
                 "maxBOF": 0,
                 "maxEOF": 1
             }
-        ]
+        ],
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/no-empty-interface": "off"
     }
 }
