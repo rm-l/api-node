@@ -10,4 +10,10 @@
     "strict": true,
     "esModuleInterop": true
   },
+  "exclude": [
+    "./jest.config.ts",
+    "./node_modules",
+    "./tests",
+    "./build"
+  ]
 }

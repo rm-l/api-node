@@ -7,7 +7,6 @@ type TAllSchemas = Record<TProperty, yup.Schema<unknown>>;
 type TValidation = (schemas: Partial<TAllSchemas>) => RequestHandler;
 
 export const validation: TValidation = (schemas) => async (req, res, next) => {
-    console.log(schemas);
 
     const errorsResult: Record<string, Record<string, string>> = {};
 
