@@ -20,8 +20,15 @@ export const getAllValidation = validation({
 );
 
 export const getAll = async (req: Request<{}, {}, {}, IQuerryProps>, res: Response) => {
+    res.setHeader('access-control-expose-headers', 'x-total-count');
+    res.setHeader('x-total-count', 1);
 
     console.log(req.query);
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Não implementado!');
+    return res.status(StatusCodes.OK).json([
+        {
+            id: 1,
+            nome: 'Belo Horizonte',
+        }
+    ]);
 
 };
