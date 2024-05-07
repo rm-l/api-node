@@ -10,7 +10,7 @@ describe('Cidades - Create', () => {
             });
 
         expect(response.statusCode).toEqual(StatusCodes.CREATED);
-        expect(typeof response.body).toEqual('object');
+        expect(typeof response.body).toEqual('number');
 
     });
     it('Tenta criar um registro com nome inferior a 3 caracteres', async () => {
