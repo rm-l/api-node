@@ -2,12 +2,7 @@ import { Request, Response } from 'express';
 import * as yup from 'yup';
 import { validation } from '../../shared/middleware';
 import { StatusCodes } from 'http-status-codes';
-
-interface IQuerryProps {
-    page?: number;
-    limit?: number;
-    filter?: string;
-}
+import { CidadesProvider } from '../../database/providers/cidades';
 
 export const getAllValidation = validation({
     query: yup.object().shape({
@@ -19,16 +14,18 @@ export const getAllValidation = validation({
 }
 );
 
-export const getAll = async (req: Request<{}, {}, {}, IQuerryProps>, res: Response) => {
-    res.setHeader('access-control-expose-headers', 'x-total-count');
-    res.setHeader('x-total-count', 1);
 
-    console.log(req.query);
-    return res.status(StatusCodes.OK).json([
-        {
-            id: 1,
-            nome: 'Belo Horizonte',
-        }
-    ]);
+export const getAll = async (req: Request, res: Response) => {
+    const result = await CidadesProvider.getAll();
+    if (result instanceof Error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: result.message
+            }
+        });
+    }
+
+    console.log('Buscando cidades');
+    return res.status(StatusCodes.OK).json(result);
 
 };

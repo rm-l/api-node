@@ -3,6 +3,7 @@ import * as yup from 'yup';
 import { validation } from '../../shared/middleware';
 import { StatusCodes } from 'http-status-codes';
 import { ICidade } from '../../database/models';
+import { CidadesProvider } from '../../database/providers/cidades';
 
 interface IParamProps {
     id?: number;
@@ -23,6 +24,16 @@ export const updateByIdValidation = validation({
 );
 
 export const updateById = async (req: Request<IParamProps, {}, IBodyProps>, res: Response) => {
+
+    const result = await CidadesProvider.updateById(req.body, req.params.id!);
+
+    if (result instanceof Error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: result.message
+            }
+        });
+    }
 
     console.log(req.params);
     console.log(req.body);
