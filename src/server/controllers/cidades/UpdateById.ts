@@ -24,8 +24,15 @@ export const updateByIdValidation = validation({
 );
 
 export const updateById = async (req: Request<IParamProps, {}, IBodyProps>, res: Response) => {
+    if (!req.params.id) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            errors: {
+                default: 'O parâmetro "id" precisa ser informado.'
+            }
+        });
+    }
 
-    const result = await CidadesProvider.updateById(req.body, req.params.id!);
+    const result = await CidadesProvider.updateById(req.params.id, req.body,);
 
     if (result instanceof Error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

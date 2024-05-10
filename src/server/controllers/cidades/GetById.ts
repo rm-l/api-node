@@ -18,6 +18,13 @@ export const getByIdValidation = validation({
 
 export const getById = async (req: Request<IParamProps>, res: Response) => {
 
+    if (!req.params.id) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            errors: {
+                default: 'O parâmetro "id" precisa ser informado.'
+            }
+        });
+    }
     const result = await CidadesProvider.getById(req.params.id!);
 
     if (result instanceof Error) {
@@ -26,10 +33,6 @@ export const getById = async (req: Request<IParamProps>, res: Response) => {
                 default: result.message
             }
         });
-    }
-
-    if (result.length === 0) {
-        return res.status(StatusCodes.OK).json('Nenhuma cidade correspondente ao id informado.');
     }
 
     console.log('Buscando cidade(s) por id');
