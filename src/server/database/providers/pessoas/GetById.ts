@@ -12,7 +12,7 @@ export const getById = async (id: number): Promise<IPessoa | Error> => {
 
         if (result) return result;
 
-        return new Error('Pessoa não registro');
+        return new Error('Registro não encontrato');
 
     } catch (error) {
         console.log(error);

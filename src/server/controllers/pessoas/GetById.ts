@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as yup from 'yup';
 import { validation } from '../../shared/middleware';
 import { StatusCodes } from 'http-status-codes';
-import { CidadesProvider } from '../../database/providers/cidades';
+import { PessoasProvider } from '../../database/providers/pessoas';
 
 
 interface IParamProps {
@@ -14,8 +14,7 @@ export const getByIdValidation = validation({
         id: yup.number().integer().required().moreThan(0),
 
     }),
-}
-);
+});
 
 export const getById = async (req: Request<IParamProps>, res: Response) => {
 
@@ -26,7 +25,7 @@ export const getById = async (req: Request<IParamProps>, res: Response) => {
             }
         });
     }
-    const result = await CidadesProvider.getById(req.params.id);
+    const result = await PessoasProvider.getById(req.params.id);
 
     if (result instanceof Error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -38,5 +37,4 @@ export const getById = async (req: Request<IParamProps>, res: Response) => {
 
     console.log('Buscando cidade(s) por id');
     return res.status(StatusCodes.OK).json(result);
-
 };
