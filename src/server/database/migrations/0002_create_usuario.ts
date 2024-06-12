@@ -8,8 +8,8 @@ export async function up(knex: Knex) {
         .createTable(ETableNames.usuario, table => {
             table.bigIncrements('id').primary().index();
             table.string('nome', 150).notNullable().checkLength('>', 3);
-            table.string('email').notNullable().unique().checkLength('>', 5).index();
-            table.string('senha').notNullable().checkLength('>', 6);
+            table.string('email').notNullable().unique().checkLength('>=', 5).index();
+            table.string('senha').notNullable().checkLength('>=', 6);
 
         }).then(() => {
             console.log(`# Created table ${ETableNames.usuario}`);
