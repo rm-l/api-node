@@ -12,7 +12,15 @@ export const authenticationCheck: RequestHandler = async (req, res, next) => {
         });
     }
 
-    if (!authorization) {
+    const [type, token] = authorization.split(' ');
+
+    if (type !== 'Bearer') {
+        return res.status(StatusCodes.UNAUTHORIZED).json({
+            errors: { default: 'Não autenticado' }
+        });
+    }
+
+    if (token !== 'teste') {
         return res.status(StatusCodes.UNAUTHORIZED).json({
             errors: { default: 'Não autenticado' }
         });
