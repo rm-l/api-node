@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import supertest from 'supertest';
 import { server } from '../src/server/Server';
 import { Knex } from '../src/server/database/knex';
